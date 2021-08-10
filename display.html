@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Contact Details</h1>
+    <div id="contactData">
+        <table>
+            <thead>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Province</th>
+                <th>Postalcode</th>
+                <th>phonenumber</th>
+                <th>Emailaddress</th>
+                <th>NotesField</th>
+            </thead>
+            <tbody>
+                <!--Display Users data-->
+            </tbody>
+        </table>
+    </div>
+    <!--Script-->
+    <script>
+    function displayData(){
+        console.log(localStorage.getItem('displayData'));
+        if(localStorage.getItem('displayData')){
+            var displayOutput = document.querySelector('tbody');
+            displayOutput.innerHTML = "";
+            JSON.parse(localStorage.getItem('displayData')).forEach(data => {
+                displayOutput.innerHTML += `
+                    <tr>
+                        <td>${data.firstname}</td>
+                        <td>${data.lastname}</td>
+                        <td>${data.address}</td>
+                        <td>${data.city}</td>
+                        <td>${data.province}</td>
+                        <td>${data.postalcode}</td>
+                        <td>${data.phonenumber}</td>
+                        <td>${data.emailaddress}</td>
+                        <td>${data.notesfield}</td>
+                    </tr>
+                `;
+            });                
+        }
+    }
+    displayData();
+    </script>
+</body>
+</html>
