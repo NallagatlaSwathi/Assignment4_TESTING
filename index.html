@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Contacts</title>
+    <!--Styles-->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class = "container">
+        <h2>Contact Form</h2>
+        <form class="form" id="form" onsubmit="return submitForm(event)">
+            <div class="row">
+                <div class="label">
+                  <label for="FirstName">FirstName</label>
+                </div>
+                <div class="text">
+                  <input type="text" id="firstname" name="firstname">
+                </div>
+            </div>
+            <div class="row">
+              <div class="label">
+                <label for="LastName">LastName</label>
+              </div>
+              <div class="text">
+                <input type="text" id="lastname" name="lastname">
+              </div>
+          </div>
+            <div class="row">
+                <div class="label">
+                  <label for="Address">Address</label>
+                </div>
+                <div class="text">
+                  <input type="text" id="address" name="address">
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">
+                  <label for="City">City</label>
+                </div>
+                <div class="text">
+                  <input type="text" id="city" name="city">
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">
+                  <label for="Province">Province</label>
+                </div>
+                <div class="text">
+                  <input type="text" id="province" name="province">
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">
+                  <label for="PostalCode">PostalCode</label>
+                </div>
+                <div class="text">
+                  <input type="text" id="postalcode" name="postalcode">
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">
+                  <label for="PhoneNumber">PhoneNumber</label>
+                </div>
+                <div class="text">
+                  <input type="text" id="phonenumber" name="phonenumber">
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">
+                  <label for="EmailAddress">EmailAddress</label>
+                </div>
+                <div class="text">
+                  <input type="text" id="emailaddress" name="emailaddress">
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">
+                  <label for="NotedField">NotesField</label>
+                </div>
+                <div class="text">
+                  <input type="text" id="notesfield" name="notesfield">
+                </div>
+            </div>
+            <div>
+                <button id="SaveBtn" onclick="save()">Save</button>
+                <button id="submitBtn" >Submit</button>
+            </div>
+        </form>
+    </div>
+    <script>
+      function save(){
+        let displayData = JSON.parse(localStorage.getItem('displayData')) || [];
+        let dataexist = displayData.length && 
+        JSON.parse(localStorage.getItem('displayData')).some(data => data.firstname.toLowerCase() == document.getElementById('firstname').value.toLowerCase() && data.lastname.toLowerCase() == document.getElementById('lastname').value.toLowerCase());
+        if(!dataexist){
+            displayData.push({
+                firstname: document.getElementById('firstname').value,
+                lastname: document.getElementById('lastname').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                province: document.getElementById('province').value,
+                postalcode: document.getElementById('postalcode').value,
+                phonenumber:document.getElementById('phonenumber').value,
+                emailaddress: document.getElementById('emailaddress').value,
+                notesfield:document.getElementById('notesfield').value
+            });
+            localStorage.setItem('displayData', JSON.stringify(displayData));
+            // console.log(localStorage.getItem('formData'));
+            displayData();
+            document.querySelector('form').reset();
+            document.getElementById('firstname').focus();
+        } else{
+            alert("You already have an account");
+        }
+        e.preventDefault();
+      }
+  </script>
+  <script src="script.js"></script> 
+</body>
+</html>
+
